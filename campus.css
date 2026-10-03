@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+
+/* Hero Section */
+
+.hero-section {
+    padding: 100px 0;
+    background: linear-gradient(
+        135deg,
+        #e9f2ff,
+        #ffffff
+    );
+}
+
+
+.hero-icon {
+    font-size: 180px;
+    color: #0d6efd;
+}
+
+
+/* Feature Cards */
+
+.feature-card {
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+
+.feature-icon {
+    font-size: 45px;
+    color: #0d6efd;
+}
+
+
+/* Buttons */
+
+.btn {
+    border-radius: 8px;
+}
+
+
+/* Footer */
+
+footer {
+    margin-top: 40px;
+}
