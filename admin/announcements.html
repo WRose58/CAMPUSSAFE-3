@@ -55,5 +55,13 @@
             </div>
         </div>
     </section>
+    <script>
+        const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
+        if (!user) {
+            window.location.href = "../login.html";
+        } else if (user.role !== "security") {
+            window.location.href = "../dashboard.html";
+        }
+    </script>
 </body>
 </html>

@@ -78,8 +78,10 @@
         const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
         const message = document.getElementById("welcomeMessage");
 
-        if (!user || user.role !== "security") {
+        if (!user) {
             window.location.href = "../login.html";
+        } else if (user.role !== "security") {
+            window.location.href = "../dashboard.html";
         } else {
             message.textContent = `Welcome, ${user.name || "Security Officer"}! You have access to the security dashboard.`;
         }

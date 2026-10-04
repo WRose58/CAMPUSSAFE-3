@@ -108,8 +108,10 @@
         const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
         const message = document.getElementById("welcomeMessage");
 
-        if (!user || user.role === "security") {
+        if (!user) {
             window.location.href = "login.html";
+        } else if (user.role === "security") {
+            window.location.href = "admin/dashboard.html";
         } else {
             message.textContent = `Welcome, ${user.name || "Student"}! Your campus safety dashboard is ready.`;
         }
