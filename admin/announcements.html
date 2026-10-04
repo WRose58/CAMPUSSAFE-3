@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements | CampusSafe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../campus.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
+            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
+            <a class="btn btn-outline-primary btn-sm" href="incidents.html">Incidents</a>
+            <a class="btn btn-outline-primary btn-sm" href="users.html">Users</a>
+            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
+        </div>
+    </div>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4">Manage Announcements</h2>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" placeholder="Enter announcement title">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" rows="4" placeholder="Write announcement message..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Publish</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold">Recent Posts</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Campus lighting upgrade scheduled for tonight.</li>
+                        <li class="list-group-item">Emergency drill at 11:00 AM tomorrow.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
