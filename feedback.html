@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback &amp; Rating | CampusSafe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="campus.css">
+</head>
+<body class="content-page-shell feedback-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Smart Safety System</small>
+                </div>
+            </div>
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span>Dashboard</span></a>
+            </div>
+        </header>
+
+        <main class="page-card feedback-page-card">
+            <header class="feedback-page-header">
+                <div>
+                    <span class="eyebrow">YOUR VOICE MATTERS</span>
+                    <h2>Feedback &amp; Rating</h2>
+                </div>
+                <p>Share how CampusSafe is working for you. Your feedback helps improve campus support.</p>
+            </header>
+
+            <form id="feedbackForm" class="feedback-form">
+                <div class="feedback-form-grid">
+                    <fieldset class="feedback-rating-fieldset">
+                        <legend>How would you rate your experience?</legend>
+                        <div class="feedback-rating-options" role="radiogroup" aria-label="Rating from one to five stars">
+                            <label><input type="radio" name="supportRating" value="1" required><span><i class="fa-solid fa-star" aria-hidden="true"></i><span class="visually-hidden">1 star</span></span></label>
+                            <label><input type="radio" name="supportRating" value="2"><span><i class="fa-solid fa-star" aria-hidden="true"></i><span class="visually-hidden">2 stars</span></span></label>
+                            <label><input type="radio" name="supportRating" value="3"><span><i class="fa-solid fa-star" aria-hidden="true"></i><span class="visually-hidden">3 stars</span></span></label>
+                            <label><input type="radio" name="supportRating" value="4"><span><i class="fa-solid fa-star" aria-hidden="true"></i><span class="visually-hidden">4 stars</span></span></label>
+                            <label><input type="radio" name="supportRating" value="5"><span><i class="fa-solid fa-star" aria-hidden="true"></i><span class="visually-hidden">5 stars</span></span></label>
+                        </div>
+                        <p class="feedback-rating-hint">Select one to five stars</p>
+                    </fieldset>
+
+                    <div class="feedback-details">
+                        <div>
+                            <label class="form-label" for="feedbackCategory">Feedback topic</label>
+                            <select id="feedbackCategory" name="category" class="form-select" required>
+                                <option value="Campus Support">Campus Support</option>
+                                <option value="Safety tools">Safety tools</option>
+                                <option value="Announcements">Announcements</option>
+                                <option value="Overall experience">Overall experience</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="form-label" for="feedbackMessage">Comments <span class="feedback-optional">Optional</span></label>
+                            <textarea id="feedbackMessage" name="feedback" class="form-control" rows="5" maxlength="1000" placeholder="Tell us what went well or what we could improve..."></textarea>
+                            <div class="feedback-character-count"><span id="feedbackCharacterCount">0</span> / 1000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-form-footer">
+                    <p id="feedbackStatus" class="feedback-status" role="status" aria-live="polite"></p>
+                    <button id="feedbackSubmit" class="btn btn-primary auth-submit" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit feedback</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/feedback.js"></script>
+</body>
+</html>

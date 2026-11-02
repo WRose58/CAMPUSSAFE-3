@@ -8,47 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
-            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
-        </div>
-    </nav>
-
-    <div class="container mt-3">
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
-            <a class="btn btn-outline-primary btn-sm" href="report.html">Report</a>
-            <a class="btn btn-outline-primary btn-sm" href="reports.html">Reports</a>
-            <a class="btn btn-outline-primary btn-sm" href="safety-map.html">Safety Map</a>
-            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
-            <a class="btn btn-outline-primary btn-sm" href="lost-found.html">Lost & Found</a>
-            <a class="btn btn-outline-primary btn-sm" href="profile.html">Profile</a>
-            <a class="btn btn-outline-primary btn-sm" href="settings.html">Settings</a>
-        </div>
-    </div>
-
-    <section class="py-5">
-        <div class="container">
-            <h2 class="fw-bold mb-4">Safety Announcements</h2>
-            <div class="list-group">
-                <div class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="mb-1">Campus lighting upgrade</h5>
-                        <small class="text-muted">Today</small>
-                    </div>
-                    <p class="mb-1">Additional lighting will be installed on the north walkway from 6pm to 9pm.</p>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
                 </div>
-                <div class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="mb-1">Emergency drill</h5>
-                        <small class="text-muted">Tomorrow</small>
-                    </div>
-                    <p class="mb-1">A campus-wide emergency evacuation drill will take place at 11:00 AM.</p>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Smart Safety System</small>
                 </div>
             </div>
-        </div>
-    </section>
+
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">LIVE UPDATES</span>
+                    <h2>Safety Announcements</h2>
+                </div>
+            </div>
+
+            <div class="notice-list" id="publicAnnouncementList" aria-live="polite"></div>
+        </section>
+    </div>
+    <script src="js/announcements.js"></script>
 </body>
 </html>

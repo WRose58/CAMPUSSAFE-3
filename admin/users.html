@@ -8,26 +8,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="../index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
-            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
-        </div>
-    </nav>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Security Control</small>
+                </div>
+            </div>
 
-    <div class="container mt-3">
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
-            <a class="btn btn-outline-primary btn-sm" href="incidents.html">Incidents</a>
-            <a class="btn btn-outline-primary btn-sm" href="users.html">Users</a>
-            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
-        </div>
-    </div>
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Dashboard</a>
+                <button id="logoutButton" class="mini-button" type="button">Logout</button>
+            </div>
+        </header>
 
-    <section class="py-5">
-        <div class="container">
-            <h2 class="fw-bold mb-4">Manage Users</h2>
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">USERS</span>
+                    <h2>Manage Users</h2>
+                </div>
+            </div>
+
             <div class="card shadow-sm border-0">
                 <div class="card-body p-0">
                     <table class="table table-hover mb-0">
@@ -39,32 +46,45 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Jane Doe</td>
-                                <td>jane@campus.edu</td>
-                                <td>Student</td>
-                                <td><span class="badge bg-success">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>Officer Williams</td>
-                                <td>security@campus.edu</td>
-                                <td>Security</td>
-                                <td><span class="badge bg-primary">Verified</span></td>
-                            </tr>
+                        <tbody id="usersTableBody">
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
     <script>
         const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
         if (!user) {
             window.location.href = "../login.html";
-        } else if (user.role !== "security") {
+        } else if (user.role !== "security" && user.role !== "administration") {
             window.location.href = "../dashboard.html";
         }
+
+        const users = [
+            { name: "Jane Doe", email: "jane@campus.edu", role: "Student", status: "Active" },
+            { name: "Officer Williams", email: "security@campus.edu", role: "Security", status: "Verified" },
+            { name: user?.name || "Current User", email: user?.email || "you@campus.edu", role: "Security", status: "Online" }
+        ];
+
+        const renderUsers = () => {
+            const rows = document.getElementById("usersTableBody");
+            rows.innerHTML = users.map((person) => {
+                const badgeClass = person.status === "Active" ? "bg-success" : person.status === "Verified" ? "bg-primary" : "bg-info text-dark";
+                return `
+                    <tr>
+                        <td>${person.name}</td>
+                        <td>${person.email}</td>
+                        <td>${person.role}</td>
+                        <td><span class="badge ${badgeClass}">${person.status}</span></td>
+                    </tr>
+                `;
+            }).join("");
+        };
+
+        renderUsers();
     </script>
+    <script type="module" src="../js/auth.js"></script>
 </body>
 </html>

@@ -8,113 +8,198 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="fa-solid fa-shield-halved"></i>
-                CampusSafe
-            </a>
-            <button id="logoutButton" class="btn btn-light">Logout</button>
-        </div>
-    </nav>
-
-    <section class="py-5">
-        <div class="container">
-            <div class="card shadow border-0 mb-4">
-                <div class="card-body p-4">
-                    <h2 class="fw-bold mb-3">Student Dashboard</h2>
-                    <p id="welcomeMessage" class="lead text-muted">Loading your profile...</p>
-                    <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
+<body class="dashboard-shell">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="brand-block">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="brand-copy">
+                    <h1>CampusSafe</h1>
+                    <small>Smart Safety System</small>
                 </div>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="report.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-triangle-exclamation fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Report an Incident</h5>
-                            <p class="mb-0 text-muted">Submit a new safety report</p>
-                        </div>
-                    </a>
-                </div>
+            <nav class="side-nav">
+                <a href="dashboard.html" class="nav-item active"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+                <a href="report.html" class="nav-item"><i class="fa-solid fa-bell"></i> Report Incident</a>
+                <a href="reports.html" class="nav-item"><i class="fa-solid fa-list-check"></i> My Reports</a>
+                <a href="safety-map.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i> Safety Map</a>
+                <a href="lost-found.html" class="nav-item"><i class="fa-solid fa-box-archive"></i> Lost &amp; Found</a>
+                <a href="announcements.html" class="nav-item"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+            </nav>
 
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="reports.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-clipboard-list fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">My Reports</h5>
-                            <p class="mb-0 text-muted">Track submitted reports</p>
-                        </div>
-                    </a>
+            <div class="emergency-box">
+                <div class="emergency-header">
+                    <span class="emergency-label"><i class="fa-solid fa-phone-volume"></i> EMERGENCY CONTACTS</span>
                 </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="safety-map.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-map-location-dot fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Safety Map</h5>
-                            <p class="mb-0 text-muted">View important campus zones</p>
-                        </div>
-                    </a>
+                <div class="emergency-row">
+                    <span>Security Desk</span>
+                    <strong>Ext 111 / 999</strong>
                 </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="announcements.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-bullhorn fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Announcements</h5>
-                            <p class="mb-0 text-muted">Read safety updates</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="lost-found.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-magnifying-glass fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Lost & Found</h5>
-                            <p class="mb-0 text-muted">Search campus belongings</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="profile.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-user fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Profile</h5>
-                            <p class="mb-0 text-muted">Update personal details</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="settings.html">
-                        <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-gear fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Settings</h5>
-                            <p class="mb-0 text-muted">Manage preferences</p>
-                        </div>
-                    </a>
+                <div class="emergency-row">
+                    <span>Campus Clinic</span>
+                    <strong>Ext 222</strong>
                 </div>
             </div>
+        </aside>
+
+        <main class="main-panel">
+            <header class="topbar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="globalSearch" type="search" placeholder="Find a dashboard shortcut..." aria-label="Search dashboard shortcuts">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="sos-mini" type="button">SOS</button>
+                    <a class="icon-button" href="announcements.html" aria-label="View announcements" title="View announcements">
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
+                    <button id="logoutButton" class="icon-button" type="button" aria-label="Logout" title="Logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                    <div class="user-pill">
+                        <div class="user-avatar">RW</div>
+                        <div>
+                            <strong>Rose W.</strong>
+                            <small>Student</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-panel">
+                <div class="hero-card">
+                    <span class="eyebrow">ACTIVE PROTECTION</span>
+                    <h2 id="welcomeMessage">Welcome back, Rose <span>👋</span></h2>
+                    <p>Your campus safety hotline and incident management node are fully operational. Stay safe and report any anomalies immediately.</p>
+
+                    <div class="hero-actions">
+                        <a href="report.html" class="primary-action"><i class="fa-solid fa-plus"></i> New Incident Report</a>
+                        <button class="secondary-action" type="button"><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>My Reports</span>
+                        <div class="stat-icon blue"><i class="fa-solid fa-file-lines"></i></div>
+                    </div>
+                    <div class="stat-number">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>Pending</span>
+                        <div class="stat-icon amber"><i class="fa-solid fa-clipboard"></i></div>
+                    </div>
+                    <div class="stat-number">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>In Progress</span>
+                        <div class="stat-icon purple"><i class="fa-solid fa-spinner"></i></div>
+                    </div>
+                    <div class="stat-number">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>Resolved</span>
+                        <div class="stat-icon green"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="stat-number">0</div>
+                </div>
+            </section>
+
+            <section class="tool-grid">
+                <a href="report.html" class="tool-card teal">
+                    <div class="tool-icon"><i class="fa-solid fa-file-circle-plus"></i></div>
+                    <span>Report Incident</span>
+                </a>
+                <a href="safety-map.html" class="tool-card blue">
+                    <div class="tool-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <span>Safety Map</span>
+                </a>
+                <a href="lost-found.html" class="tool-card yellow">
+                    <div class="tool-icon"><i class="fa-solid fa-box-archive"></i></div>
+                    <span>Lost &amp; Found</span>
+                </a>
+                <a href="feedback.html" class="tool-card teal">
+                    <div class="tool-icon"><i class="fa-solid fa-star"></i></div>
+                    <span>Feedback &amp; Rating</span>
+                </a>
+                <button class="tool-card mint" type="button" data-open-support>
+                    <div class="tool-icon"><i class="fa-solid fa-robot"></i></div>
+                    <span>AI Safety Assistant</span>
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fa-solid fa-headset"></i>
+                Campus Support
+            </div>
+            <button type="button" id="chatToggle" aria-label="Open chat" aria-expanded="false">
+                <i class="fa-solid fa-message"></i>
+            </button>
         </div>
-    </section>
+        <div class="chat-body">
+            <div id="chatMessages" aria-live="polite"></div>
+            <p id="chatStatus" class="chat-status" role="status">Connecting to Campus Support...</p>
+        </div>
+        <form class="chat-rating-form" id="chatRatingForm">
+            <fieldset>
+                <legend>Rate your support experience</legend>
+                <div class="chat-rating-options" role="radiogroup" aria-label="Support rating">
+                    <label><input type="radio" name="supportRating" value="1" required><span aria-hidden="true">1</span><span class="visually-hidden">1 star</span></label>
+                    <label><input type="radio" name="supportRating" value="2"><span aria-hidden="true">2</span><span class="visually-hidden">2 stars</span></label>
+                    <label><input type="radio" name="supportRating" value="3"><span aria-hidden="true">3</span><span class="visually-hidden">3 stars</span></label>
+                    <label><input type="radio" name="supportRating" value="4"><span aria-hidden="true">4</span><span class="visually-hidden">4 stars</span></label>
+                    <label><input type="radio" name="supportRating" value="5"><span aria-hidden="true">5</span><span class="visually-hidden">5 stars</span></label>
+                </div>
+            </fieldset>
+            <label class="visually-hidden" for="chatFeedback">Optional feedback</label>
+            <input id="chatFeedback" name="feedback" type="text" maxlength="500" placeholder="Optional feedback">
+            <button type="submit">Submit rating</button>
+            <p id="chatRatingStatus" class="chat-rating-status" role="status"></p>
+        </form>
+        <form class="chat-input-row" id="chatForm">
+            <input id="chatInput" type="text" placeholder="Type a message..." aria-label="Type a message" autocomplete="off">
+            <button type="submit" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+    </div>
 
     <script type="module" src="js/auth.js"></script>
-    <script>
-        const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
-        const message = document.getElementById("welcomeMessage");
+    <script type="module">
+        import { initializeStudentSupport } from "./js/support-chat.js";
 
+        const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
         if (!user) {
             window.location.href = "login.html";
-        } else if (user.role === "security") {
+        } else if (user.role === "security" || user.role === "administration") {
             window.location.href = "admin/dashboard.html";
         } else {
-            message.textContent = `Welcome, ${user.name || "Student"}! Your campus safety dashboard is ready.`;
+            welcomeMessage.innerHTML = `Welcome back, ${user.name || "Rose"} <span>👋</span>`;
         }
+
+        const chatToggle = document.getElementById("chatToggle");
+        const chatWidget = document.getElementById("chatWidget");
+
+        chatToggle.addEventListener("click", () => {
+            chatWidget.classList.toggle("open");
+            const isOpen = chatWidget.classList.contains("open");
+            chatToggle.setAttribute("aria-expanded", String(isOpen));
+            chatToggle.setAttribute("aria-label", isOpen ? "Close chat" : "Open chat");
+        });
+
+        initializeStudentSupport(user);
+
     </script>
 </body>
 </html>

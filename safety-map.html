@@ -6,42 +6,49 @@
     <title>Campus Safety Map | CampusSafe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <link rel="stylesheet" href="campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
-            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
-        </div>
-    </nav>
-
-    <div class="container mt-3">
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
-            <a class="btn btn-outline-primary btn-sm" href="report.html">Report</a>
-            <a class="btn btn-outline-primary btn-sm" href="reports.html">Reports</a>
-            <a class="btn btn-outline-primary btn-sm" href="safety-map.html">Safety Map</a>
-            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
-            <a class="btn btn-outline-primary btn-sm" href="lost-found.html">Lost & Found</a>
-            <a class="btn btn-outline-primary btn-sm" href="profile.html">Profile</a>
-            <a class="btn btn-outline-primary btn-sm" href="settings.html">Settings</a>
-        </div>
-    </div>
-
-    <section class="py-5">
-        <div class="container">
-            <h2 class="fw-bold mb-4">Campus Safety Map</h2>
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-                    <div class="bg-light border rounded p-5 text-center">
-                        <i class="fa-solid fa-map-location-dot fa-3x text-primary mb-3"></i>
-                        <h4>Safety map coming soon</h4>
-                        <p class="text-muted mb-0">This page will show emergency exits, security posts, and safe zones.</p>
-                    </div>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Smart Safety System</small>
                 </div>
             </div>
-        </div>
-    </section>
+
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">SAFETY OVERVIEW</span>
+                    <h2>Campus Safety Map</h2>
+                </div>
+            </div>
+
+            <div class="map-panel">
+                <form class="map-search" id="mapSearchForm" role="search">
+                    <label class="visually-hidden" for="mapSearchInput">Search for a place or address</label>
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input id="mapSearchInput" type="search" placeholder="Search a place or address" autocomplete="off">
+                    <button type="submit">Search</button>
+                    <button id="locateMeButton" class="map-locate-button" type="button" aria-label="Locate me" title="Locate me"><i class="fa-solid fa-location-crosshairs"></i></button>
+                </form>
+                <div id="campusMap" class="map-canvas" role="application" aria-label="Interactive OpenStreetMap. Use the zoom buttons or search for a location."></div>
+                <p id="mapStatus" class="map-status" role="status" aria-live="polite">Search for a location or use Locate me to center the map. Campus safety locations have not been configured.</p>
+            </div>
+        </section>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="js/safety-map.js"></script>
 </body>
 </html>

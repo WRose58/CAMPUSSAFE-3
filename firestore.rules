@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSupportStaff() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['security', 'administration'];
+    }
+
+      // Merge this match block into the existing Firestore rules; retain other app rules.
+    match /supportThreads/{threadId} {
+      allow create: if signedIn()
+        && request.auth.uid == threadId
+        && request.resource.data.userId == request.auth.uid;
+
+      allow get: if signedIn() && (request.auth.uid == threadId || isSupportStaff());
+      allow list: if isSupportStaff();
+
+      allow update: if signedIn() && (
+        (request.auth.uid == threadId
+          && resource.data.userId == request.auth.uid
+          && request.resource.data.userId == resource.data.userId)
+        || isSupportStaff()
+      );
+
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        allow get, list: if signedIn() && (request.auth.uid == threadId || isSupportStaff());
+
+        allow create: if signedIn()
+          && request.resource.data.senderId == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 2000
+          && (
+            (request.auth.uid == threadId && request.resource.data.senderRole == 'student')
+            || (isSupportStaff() && request.resource.data.senderRole in ['security', 'administration'])
+          );
+
+        allow update, delete: if false;
+      }
+    }
+  }
+}

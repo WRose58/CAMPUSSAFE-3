@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Support | CampusSafe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../campus.css">
+</head>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Security Control</small>
+                </div>
+            </div>
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Dashboard</a>
+                <button id="logoutButton" class="mini-button" type="button">Logout</button>
+            </div>
+        </header>
+
+        <section class="page-card support-page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">STUDENT MESSAGES</span>
+                    <h2>Campus Support</h2>
+                </div>
+                <p id="supportStatus" class="support-status" role="status">Connecting to support inbox...</p>
+            </div>
+
+            <div class="support-layout">
+                <aside class="support-thread-panel" aria-label="Conversations">
+                    <h3>Conversations</h3>
+                    <div id="supportThreadList" class="support-thread-list"></div>
+                </aside>
+                <section class="support-conversation-panel" aria-label="Selected conversation">
+                    <h3 id="supportConversationTitle">Select a conversation</h3>
+                    <div id="supportConversation" class="support-conversation" aria-live="polite">
+                        <p class="support-empty-state">Choose a conversation to view messages.</p>
+                    </div>
+                    <form id="supportReplyForm" class="support-reply-form">
+                        <input id="supportReplyInput" type="text" placeholder="Reply to student..." aria-label="Reply to student" autocomplete="off" required>
+                        <button type="submit" aria-label="Send reply"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module">
+        import { initializeSupportInbox } from "../js/support-inbox.js";
+
+        const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
+        if (!user) {
+            window.location.href = "../login.html";
+        } else if (user.role !== "security" && user.role !== "administration") {
+            window.location.href = "../dashboard.html";
+        } else {
+            initializeSupportInbox(user);
+        }
+    </script>
+</body>
+</html>

@@ -19,193 +19,77 @@
     <link rel="stylesheet" href="campus.css">
 </head>
 
-<body>
-
-<nav class="navbar navbar-dark bg-primary">
-    <div class="container">
-
-        <a class="navbar-brand fw-bold" href="index.html">
-            <i class="fa-solid fa-shield-halved"></i>
-            CampusSafe
-        </a>
-
-    </div>
-</nav>
-
-
-<section class="py-5">
-
-    <div class="container">
-
-        <div class="row justify-content-center">
-
-            <div class="col-md-7 col-lg-5">
-
-                <div class="card shadow border-0">
-
-                    <div class="card-body p-4">
-
-                        <div class="text-center mb-4">
-
-                            <i class="fa-solid fa-user-plus text-primary"
-                               style="font-size: 50px;"></i>
-
-                            <h2 class="fw-bold mt-3">
-                                Create Account
-                            </h2>
-
-                            <p class="text-muted">
-                                Join CampusSafe to access campus safety services.
-                            </p>
-
-                        </div>
-
-
-                        <form id="registerForm">
-
-                            <!-- Full Name -->
-                            <div class="mb-3">
-
-                                <label for="name" class="form-label">
-                                    Full Name
-                                </label>
-
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="name"
-                                    placeholder="Enter your full name"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <!-- Email -->
-                            <div class="mb-3">
-
-                                <label for="email" class="form-label">
-                                    University Email
-                                </label>
-
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="email"
-                                    placeholder="Enter your email"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <!-- Password -->
-                            <div class="mb-3">
-
-                                <label for="password" class="form-label">
-                                    Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="password"
-                                    placeholder="Create a password"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <!-- Confirm Password -->
-                            <div class="mb-3">
-
-                                <label for="confirmPassword" class="form-label">
-                                    Confirm Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="confirmPassword"
-                                    placeholder="Confirm your password"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <!-- Role -->
-                            <div class="mb-4">
-
-                                <label for="role" class="form-label">
-                                    Account Type
-                                </label>
-
-                                <select class="form-select" id="role">
-
-                                    <option value="student">
-                                        Student
-                                    </option>
-
-                                    <option value="security">
-                                        Security Officer
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary w-100"
-                            >
-                                <i class="fa-solid fa-user-plus"></i>
-                                Create Account
-                            </button>
-
-                        </form>
-
-
-                        <div class="text-center mt-4">
-
-                            <p class="mb-0">
-                                Already have an account?
-                                <a href="login.html">
-                                    Login
-                                </a>
-                            </p>
-
-                        </div>
-
+<body class="auth-page">
+    <div class="auth-shell">
+        <div class="auth-panel">
+            <div class="auth-brand-wrap">
+                <div class="auth-brand">
+                    <div class="brand-mark">
+                        <i class="fa-solid fa-shield-halved"></i>
                     </div>
-
+                    <div>
+                        <h1>CampusSafe</h1>
+                        <small>Smart Safety System</small>
+                    </div>
                 </div>
-
             </div>
 
-        </div>
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="auth-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <h2>Create account</h2>
+                    <p>Join CampusSafe to access campus safety services.</p>
+                </div>
 
+                <form id="registerForm" class="auth-form">
+                    <div id="formMessage" class="alert d-none" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">University Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="role" class="form-label">Account Type</label>
+                        <select class="form-select" id="role">
+                            <option value="student">Student</option>
+                            <option value="security">Security Officer</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 auth-submit">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>
+                        Already have an account?
+                        <a href="login.html">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-</section>
-
-
-<footer class="bg-dark text-white text-center py-4">
-
-    <p class="mb-1">
-        <i class="fa-solid fa-shield-halved"></i>
-        CampusSafe
-    </p>
-
-    <small>
-        Smart Campus Safety Management System
-    </small>
-
-</footer>
-
-<script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
-```

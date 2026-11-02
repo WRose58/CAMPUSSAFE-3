@@ -8,56 +8,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
-            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
-        </div>
-    </nav>
-
-    <div class="container mt-3">
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
-            <a class="btn btn-outline-primary btn-sm" href="report.html">Report</a>
-            <a class="btn btn-outline-primary btn-sm" href="reports.html">Reports</a>
-            <a class="btn btn-outline-primary btn-sm" href="safety-map.html">Safety Map</a>
-            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
-            <a class="btn btn-outline-primary btn-sm" href="lost-found.html">Lost & Found</a>
-            <a class="btn btn-outline-primary btn-sm" href="profile.html">Profile</a>
-            <a class="btn btn-outline-primary btn-sm" href="settings.html">Settings</a>
-        </div>
-    </div>
-
-    <section class="py-5">
-        <div class="container">
-            <div class="card shadow border-0">
-                <div class="card-body p-4">
-                    <h2 class="fw-bold mb-3">Report an Incident</h2>
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label">Type of incident</label>
-                            <select class="form-select">
-                                <option>Safety concern</option>
-                                <option>Medical emergency</option>
-                                <option>Suspicious activity</option>
-                                <option>Harassment</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Location</label>
-                            <input type="text" class="form-control" placeholder="e.g. Library entrance">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Description</label>
-                            <textarea class="form-control" rows="5" placeholder="Describe the incident..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit Report</button>
-                    </form>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Smart Safety System</small>
                 </div>
             </div>
-        </div>
-    </section>
+
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">ACTIVE REPORTING</span>
+                    <h2>Report an Incident</h2>
+                </div>
+            </div>
+
+            <form class="report-form" id="reportForm">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Type of incident</label>
+                        <select class="form-select" id="incidentType">
+                            <option>Safety concern</option>
+                            <option>Medical emergency</option>
+                            <option>Suspicious activity</option>
+                            <option>Harassment</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Urgency</label>
+                        <select class="form-select" id="incidentUrgency">
+                            <option>Low</option>
+                            <option selected>Medium</option>
+                            <option>High</option>
+                            <option>Critical</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" id="incidentLocation" placeholder="e.g. Library entrance">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" rows="6" id="incidentDescription" placeholder="Describe the incident..."></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label" for="incidentPhoto">Photo evidence (optional)</label>
+                        <input class="form-control" id="incidentPhoto" type="file" accept="image/*">
+                        <div class="form-text">Images are resized before saving. Maximum upload size: 8 MB.</div>
+                        <img id="incidentPhotoPreview" class="upload-preview" alt="Incident photo preview" hidden>
+                    </div>
+                </div>
+
+                <div class="report-submit-row">
+                    <button type="submit" class="btn btn-primary auth-submit">Submit Report</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>

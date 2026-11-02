@@ -8,37 +8,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
-            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
-        </div>
-    </nav>
-
-    <div class="container mt-3">
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
-            <a class="btn btn-outline-primary btn-sm" href="report.html">Report</a>
-            <a class="btn btn-outline-primary btn-sm" href="reports.html">Reports</a>
-            <a class="btn btn-outline-primary btn-sm" href="safety-map.html">Safety Map</a>
-            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
-            <a class="btn btn-outline-primary btn-sm" href="lost-found.html">Lost & Found</a>
-            <a class="btn btn-outline-primary btn-sm" href="profile.html">Profile</a>
-            <a class="btn btn-outline-primary btn-sm" href="settings.html">Settings</a>
-        </div>
-    </div>
-
-    <section class="py-5">
-        <div class="container">
-            <h2 class="fw-bold mb-4">Lost & Found</h2>
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-                    <p class="text-muted">Report or browse lost items on campus.</p>
-                    <button class="btn btn-primary">Submit an Item</button>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Smart Safety System</small>
                 </div>
             </div>
-        </div>
-    </section>
+
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">RECOVERY DESK</span>
+                    <h2>Lost &amp; Found</h2>
+                </div>
+            </div>
+
+            <div id="lostItemList" class="notice-list"></div>
+
+            <form id="lostFoundForm" class="report-form">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label" for="lostItemStatus">Listing type</label>
+                        <select id="lostItemStatus" class="form-select">
+                            <option value="Lost">Lost</option>
+                            <option value="Found">Found</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Item</label>
+                        <input id="lostItemName" type="text" class="form-control" placeholder="e.g. Wallet">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Location</label>
+                        <input id="lostItemLocation" type="text" class="form-control" placeholder="e.g. Library">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Details</label>
+                        <input id="lostItemNote" type="text" class="form-control" placeholder="Optional details">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="lostItemPhoto">Item photo (optional)</label>
+                        <input id="lostItemPhoto" class="form-control" type="file" accept="image/*">
+                        <div class="form-text">Images are resized before saving. Maximum upload size: 8 MB.</div>
+                        <img id="lostItemPhotoPreview" class="upload-preview" alt="Item photo preview" hidden>
+                    </div>
+                </div>
+
+                <div class="report-submit-row">
+                    <button class="btn btn-primary auth-submit" type="submit">Submit an Item</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>

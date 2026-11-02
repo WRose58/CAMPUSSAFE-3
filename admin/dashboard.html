@@ -8,28 +8,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <i class="fa-solid fa-shield-halved"></i>
-                CampusSafe
-            </a>
-            <button id="logoutButton" class="btn btn-light">Logout</button>
-        </div>
-    </nav>
-
-    <section class="py-5">
-        <div class="container">
-            <div class="card shadow border-0 mb-4">
-                <div class="card-body p-4">
-                    <h2 class="fw-bold mb-3">Security Dashboard</h2>
-                    <p id="welcomeMessage" class="lead text-muted">Loading your profile...</p>
-                    <a href="../index.html" class="btn btn-primary mt-3">Back to Home</a>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Security Control</small>
                 </div>
             </div>
 
-            <div class="row g-4">
+            <div class="page-actions">
+                <a href="../dashboard.html" class="mini-button">Student View</a>
+                <button id="logoutButton" class="mini-button" type="button">Logout</button>
+            </div>
+        </header>
+
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">OVERVIEW</span>
+                    <h2>Security Dashboard</h2>
+                </div>
+            </div>
+
+            <p id="welcomeMessage" class="lead text-muted">Loading your profile...</p>
+
+            <section class="case-overview" aria-label="Reported case overview">
+                <div class="case-overview-heading">
+                    <div>
+                        <span class="eyebrow">LIVE CASE COUNTS</span>
+                        <h3>Reported incidents</h3>
+                    </div>
+                    <a class="btn btn-outline-primary" href="incidents.html">Review cases</a>
+                </div>
+                <div class="report-summary-grid">
+                    <div class="report-summary-item"><span>Total cases</span><strong id="adminTotalCases">0</strong></div>
+                    <div class="report-summary-item"><span>Pending</span><strong id="adminPendingCases">0</strong></div>
+                    <div class="report-summary-item"><span>In progress</span><strong id="adminInProgressCases">0</strong></div>
+                    <div class="report-summary-item"><span>Resolved</span><strong id="adminResolvedCases">0</strong></div>
+                </div>
+                <div class="report-chart-panel admin-chart-panel" role="img" aria-label="Bar chart showing reported cases by status">
+                    <canvas id="adminCaseStatusChart"></canvas>
+                </div>
+            </section>
+
+            <div class="row g-4 mt-2">
                 <div class="col-md-6 col-lg-3">
                     <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="incidents.html">
                         <div class="card-body text-center p-4">
@@ -61,18 +88,19 @@
                 </div>
 
                 <div class="col-md-6 col-lg-3">
-                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="../dashboard.html">
+                    <a class="card text-decoration-none h-100 shadow-sm border-0 text-dark" href="../report.html">
                         <div class="card-body text-center p-4">
-                            <i class="fa-solid fa-arrow-left fa-2x text-primary mb-3"></i>
-                            <h5 class="fw-bold">Student View</h5>
-                            <p class="mb-0 text-muted">Return to student dashboard</p>
+                            <i class="fa-solid fa-file-lines fa-2x text-primary mb-3"></i>
+                            <h5 class="fw-bold">Quick Report</h5>
+                            <p class="mb-0 text-muted">Open reporting workflow</p>
                         </div>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script type="module" src="../js/auth.js"></script>
     <script>
         const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
@@ -80,10 +108,51 @@
 
         if (!user) {
             window.location.href = "../login.html";
-        } else if (user.role !== "security") {
+        } else if (user.role !== "security" && user.role !== "administration") {
             window.location.href = "../dashboard.html";
         } else {
             message.textContent = `Welcome, ${user.name || "Security Officer"}! You have access to the security dashboard.`;
+        }
+
+        const cases = JSON.parse(localStorage.getItem("campusSafeReports") || "[]");
+        const counts = {
+            pending: cases.filter((item) => (item.status || "Pending") === "Pending").length,
+            progress: cases.filter((item) => item.status === "In Progress").length,
+            resolved: cases.filter((item) => item.status === "Resolved").length
+        };
+        document.getElementById("adminTotalCases").textContent = cases.length;
+        document.getElementById("adminPendingCases").textContent = counts.pending;
+        document.getElementById("adminInProgressCases").textContent = counts.progress;
+        document.getElementById("adminResolvedCases").textContent = counts.resolved;
+        new Chart(document.getElementById("adminCaseStatusChart"), {
+            type: "bar",
+            data: {
+                labels: ["Pending", "In progress", "Resolved"],
+                datasets: [{
+                    label: "Reported cases",
+                    data: [counts.pending, counts.progress, counts.resolved],
+                    backgroundColor: ["#f59e0b", "#1d4ed8", "#10b981"],
+                    borderRadius: 5,
+                    maxBarThickness: 72
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: "#e2e8f0" } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        const logoutButton = document.getElementById("logoutButton");
+        if (logoutButton) {
+            logoutButton.addEventListener("click", () => {
+                localStorage.removeItem("campusSafeUser");
+                window.location.href = "../login.html";
+            });
         }
     </script>
 </body>

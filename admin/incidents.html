@@ -8,66 +8,117 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../campus.css">
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="../index.html"><i class="fa-solid fa-shield-halved"></i> CampusSafe</a>
-            <a class="btn btn-light" href="dashboard.html">Back to Dashboard</a>
-        </div>
-    </nav>
+<body class="content-page-shell">
+    <div class="content-page-layout">
+        <header class="page-topbar">
+            <div class="brand-inline">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h1>CampusSafe</h1>
+                    <small>Security Control</small>
+                </div>
+            </div>
 
-    <div class="container mt-3">
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary btn-sm" href="dashboard.html">Dashboard</a>
-            <a class="btn btn-outline-primary btn-sm" href="incidents.html">Incidents</a>
-            <a class="btn btn-outline-primary btn-sm" href="users.html">Users</a>
-            <a class="btn btn-outline-primary btn-sm" href="announcements.html">Announcements</a>
-        </div>
-    </div>
+            <div class="page-actions">
+                <a href="dashboard.html" class="mini-button">Dashboard</a>
+                <button id="logoutButton" class="mini-button" type="button">Logout</button>
+            </div>
+        </header>
 
-    <section class="py-5">
-        <div class="container">
-            <h2 class="fw-bold mb-4">Manage Incidents</h2>
+        <section class="page-card">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">INCIDENTS</span>
+                    <h2>Manage Incidents</h2>
+                </div>
+            </div>
+
             <div class="card shadow-sm border-0">
                 <div class="card-body p-0">
                     <table class="table table-hover mb-0">
                         <thead>
                             <tr>
-                                <th>Reporter</th>
                                 <th>Type</th>
                                 <th>Location</th>
                                 <th>Status</th>
+                                <th>Photo</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Jane Doe</td>
-                                <td>Suspicious activity</td>
-                                <td>North Gate</td>
-                                <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                <td><button class="btn btn-sm btn-primary">Review</button></td>
-                            </tr>
-                            <tr>
-                                <td>John Smith</td>
-                                <td>Medical emergency</td>
-                                <td>Student Center</td>
-                                <td><span class="badge bg-success">Resolved</span></td>
-                                <td><button class="btn btn-sm btn-outline-primary">View</button></td>
-                            </tr>
+                        <tbody id="incidentsTableBody">
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
     <script>
         const user = JSON.parse(localStorage.getItem("campusSafeUser") || "null");
         if (!user) {
             window.location.href = "../login.html";
-        } else if (user.role !== "security") {
+        } else if (user.role !== "security" && user.role !== "administration") {
             window.location.href = "../dashboard.html";
         }
+
+        const seedReports = () => {
+            if (!localStorage.getItem("campusSafeReports")) {
+                localStorage.setItem("campusSafeReports", JSON.stringify([
+                    { type: "Suspicious activity", location: "North Gate", status: "Pending" },
+                    { type: "Medical emergency", location: "Student Center", status: "Resolved" }
+                ]));
+            }
+        };
+
+        const renderIncidents = () => {
+            seedReports();
+            const reports = JSON.parse(localStorage.getItem("campusSafeReports") || "[]");
+            const rows = document.getElementById("incidentsTableBody");
+            rows.replaceChildren();
+            reports.forEach((report, index) => {
+                const row = document.createElement("tr");
+                const type = document.createElement("td");
+                type.textContent = report.type || "Safety concern";
+                const location = document.createElement("td");
+                location.textContent = report.location || "Unknown";
+                const statusCell = document.createElement("td");
+                const status = report.status || "Pending";
+                const badge = document.createElement("span");
+                badge.className = `badge ${status === "Resolved" ? "bg-success" : status === "In Progress" ? "bg-primary" : "bg-warning text-dark"}`;
+                badge.textContent = status;
+                statusCell.append(badge);
+                const photoCell = document.createElement("td");
+                if (report.photo) {
+                    const photoLink = document.createElement("a");
+                    photoLink.href = report.photo;
+                    photoLink.target = "_blank";
+                    photoLink.rel = "noopener";
+                    photoLink.textContent = "View photo";
+                    photoCell.append(photoLink);
+                } else {
+                    photoCell.textContent = "None";
+                }
+                const actionCell = document.createElement("td");
+                const action = document.createElement("button");
+                action.className = "btn btn-sm btn-primary";
+                action.type = "button";
+                action.textContent = status === "Pending" ? "Start review" : status === "In Progress" ? "Resolve" : "Resolved";
+                action.disabled = status === "Resolved";
+                action.addEventListener("click", () => {
+                    reports[index].status = status === "Pending" ? "In Progress" : "Resolved";
+                    localStorage.setItem("campusSafeReports", JSON.stringify(reports));
+                    renderIncidents();
+                });
+                actionCell.append(action);
+                row.append(type, location, statusCell, photoCell, actionCell);
+                rows.append(row);
+            });
+        };
+
+        renderIncidents();
     </script>
+    <script type="module" src="../js/auth.js"></script>
 </body>
 </html>
